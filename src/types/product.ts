@@ -1,12 +1,12 @@
 export type Product = {
   id: string;
-  image: string;
+  imageUrl: string;
   name: string;
   count: number;
   size: {
     width: number;
     height: number;
   };
-  weight: string;
+  weight: number;
   comments: string[];
 };
