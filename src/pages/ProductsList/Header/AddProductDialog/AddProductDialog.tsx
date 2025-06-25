@@ -49,7 +49,7 @@ const AddProductDialog = ({ isDialogOpen, handleClose }: Props) => {
       name: data.productName,
       count: data.count,
       imageUrl: data.imageUrl,
-      weight: data.weight,
+      weight: `${data.weight}g`,
       size: {
         width: data.sizeWidth,
         height: data.sizeHeight,

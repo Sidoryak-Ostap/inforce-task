@@ -1,15 +1,10 @@
 import { Product } from "../../../types/product";
-import {
-  CardContent,
-  Typography,
-  Chip,
-  Button,
-  IconButton,
-} from "@mui/material";
+import { CardContent, Typography, Chip, IconButton } from "@mui/material";
 import {
   StyledCard,
   StyledChipBox,
   StyledDeleteIconBox,
+  StyledLink,
   StyledProductImage,
 } from "./styled";
 
@@ -18,6 +13,7 @@ import { useState } from "react";
 import ConfirmActionDialog from "../../../components/ConfirmActionDialog";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { deleteProduct } from "../../../store/products/productsThunks";
+
 type Props = {
   product: Product;
 };
@@ -60,12 +56,7 @@ const ProductCard = ({ product }: Props) => {
           <Chip label={`Weight: ${weight}`} />
         </StyledChipBox>
 
-        <Button
-          sx={{ fontWeight: 700, width: "100%", mt: 3 }}
-          variant="contained"
-        >
-          View details
-        </Button>
+        <StyledLink to={`/products/${id}`}>View details</StyledLink>
       </CardContent>
 
       <ConfirmActionDialog

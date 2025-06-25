@@ -1,5 +1,6 @@
 import { Box, Card } from "@mui/material";
 import { lighten, styled } from "@mui/material/styles";
+import { Link } from "react-router-dom";
 
 export const StyledCard = styled(Card)(() => ({
   width: "100%",
@@ -42,4 +43,16 @@ export const StyledDeleteIconBox = styled(Box)(({ theme }) => ({
   "&:hover": {
     backgroundColor: lighten(theme.palette.error.main, 0.7),
   },
+}));
+
+export const StyledLink = styled(Link)(({ theme }) => ({
+  fontWeight: 700,
+  width: "100%",
+  marginTop: theme.spacing(2),
+  backgroundColor: theme.palette.primary.main,
+  color: theme.palette.common.white,
+  display: "inline-block",
+  textAlign: "center",
+  padding: theme.spacing(1, 2),
+  borderRadius: theme.shape.borderRadius,
 }));
