@@ -7,6 +7,6 @@ export type Product = {
     width: number;
     height: number;
   };
-  weight: number;
+  weight: string;
   comments: string[];
 };
