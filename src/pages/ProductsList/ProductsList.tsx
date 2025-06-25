@@ -4,19 +4,13 @@ import { fetchProducts } from "../../store/products/productsThunks";
 import Loader from "../../components/Loader";
 import { Box, Grid } from "@mui/material";
 
-import {
-  StyledAddButton,
-  StyledProductsList,
-  StyledProductsListHeader,
-} from "./styled";
-import Typography from "@mui/material/Typography";
+import { StyledProductsList } from "./styled";
 import Container from "@mui/material/Container";
-import AddIcon from "@mui/icons-material/Add";
 import ProductCard from "./ProductCard";
+import Header from "./Header";
 
 const ProductsList = () => {
   const dispatch = useAppDispatch();
-
   const { products, loading, error } = useAppSelector(
     (state) => state.products
   );
@@ -35,26 +29,7 @@ const ProductsList = () => {
   return (
     <StyledProductsList>
       <Container maxWidth="lg">
-        <StyledProductsListHeader>
-          <Box>
-            <Typography sx={{ fontSize: "2rem", fontWeight: 700 }}>
-              Products
-            </Typography>
-            <Typography
-              sx={{
-                color: (theme) => theme.palette.grey[400],
-                fontSize: "1.2rem",
-              }}
-            >
-              Products in catalog {products.length}
-            </Typography>
-          </Box>
-
-          <StyledAddButton variant="contained" startIcon={<AddIcon />}>
-            Add product
-          </StyledAddButton>
-        </StyledProductsListHeader>
-
+        <Header productsLength={products.length} />
         <Grid container spacing={2}>
           {sortedProductsByName.map((product) => (
             <Grid
@@ -68,7 +43,7 @@ const ProductsList = () => {
         </Grid>
 
         {!loading && !error && products.length === 0 && (
-          <Box>Немає продуктів</Box>
+          <Box>There are no products available</Box>
         )}
       </Container>
     </StyledProductsList>

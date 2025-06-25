@@ -18,3 +18,14 @@ export const deleteProduct = createAsyncThunk<string, string>(
     return productId;
   }
 );
+
+export const createProduct = createAsyncThunk<Product, Product>(
+  "products/createProduct",
+  async (productData) => {
+    const response = await apiClient.post(
+      API_ROUTES.PRODUCTS.CREATE,
+      productData
+    );
+    return response.data;
+  }
+);
