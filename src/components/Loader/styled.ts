@@ -5,4 +5,5 @@ export const StyledLoader = styled(Box)(() => ({
   display: "flex",
   justifyContent: "center",
   alignItems: "center",
+  height: "100vh",
 }));
