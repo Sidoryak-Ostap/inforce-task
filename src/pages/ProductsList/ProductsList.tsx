@@ -1,15 +1,22 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { fetchProducts } from "../../store/products/productsThunks";
 import Loader from "../../components/Loader";
 import { Box, Grid } from "@mui/material";
-
 import { StyledProductsList } from "./styled";
 import Container from "@mui/material/Container";
 import ProductCard from "./ProductCard";
 import Header from "./Header";
+import { SortOrder } from "../../types/sortOrder";
+import { sortProducts } from "./Header/helper";
 
 const ProductsList = () => {
+  const [nameSort, setNameSort] = useState<SortOrder>("asc");
+  const [countSort, setCountSort] = useState<SortOrder>("asc");
+
+  const handleChangeNameSort = (value: SortOrder) => setNameSort(value);
+  const handleChangeCountSort = (value: SortOrder) => setCountSort(value);
+
   const dispatch = useAppDispatch();
   const { products, loading, error } = useAppSelector(
     (state) => state.products
@@ -22,16 +29,23 @@ const ProductsList = () => {
   if (loading) return <Loader />;
   if (error) return <Box>An error occurred: {error}</Box>;
 
-  const sortedProductsByName = products.length
-    ? [...products].sort((a, b) => a.name.localeCompare(b.name))
-    : [];
+  const sortedProducts =
+    nameSort || countSort
+      ? sortProducts(products, nameSort, countSort)
+      : products;
 
   return (
     <StyledProductsList>
       <Container maxWidth="lg">
-        <Header productsLength={products.length} />
+        <Header
+          nameSort={nameSort}
+          setNameSort={handleChangeNameSort}
+          countSort={countSort}
+          setCountSort={handleChangeCountSort}
+          productsLength={products.length}
+        />
         <Grid container spacing={2}>
-          {sortedProductsByName.map((product) => (
+          {sortedProducts.map((product) => (
             <Grid
               sx={{ display: "flex" }}
               key={product.id}
